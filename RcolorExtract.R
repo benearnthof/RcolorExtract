@@ -66,5 +66,22 @@ desparse <- function(df) {
   return(z)
 }
 dense <- desparse(spreadtest)
-
-          
+# extract unique columns 
+getuniques <- function(df) {
+  df <- as.data.frame(df)
+  names <- colnames(df)
+  for (i in 1:(ncol(df) - 1)) {
+    temp <- df[,i]
+    name <- names[i]
+    for (j in (i + 1):ncol(df)) {
+      if (isTRUE(temp %in% df[,j])) {
+        df <- df[,!(names(df) %in% name)]
+      }
+    }
+  }
+  return(df)
+}
+dense          
+denseuniques <- getuniques(dense)
+dense[,1] %in% dense[,2]
+isTRUE(dense[,1] %in% dense[,2])
